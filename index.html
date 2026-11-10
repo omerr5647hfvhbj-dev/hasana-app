@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#103b2d">
+<link rel="manifest" href="manifest.json">
+<title>حسنة</title>
+<style>
+:root{--bg:#071f19;--panel:#103b2d;--panel2:#164635;--gold:#e5c36b;--cream:#f7f1df;--muted:#c8d5cb}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#071f19,#0d3025 60%,#071f19);color:var(--cream);font-family:system-ui,"Noto Naskh Arabic",sans-serif}
+header{padding:24px 18px 18px;text-align:center;border-bottom:1px solid #b89a4d55}
+.logo{font-size:34px;color:var(--gold);font-weight:800}.sub{color:var(--muted);margin-top:5px}
+main{max-width:850px;margin:auto;padding:16px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+button{font:inherit;cursor:pointer}.tile{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid #d6b85c55;color:var(--cream);border-radius:16px;padding:18px 10px;min-height:92px;font-size:17px}
+.tile span{display:block;color:var(--gold);font-size:24px;margin-bottom:5px}
+#view{display:none}.top{display:flex;align-items:center;gap:10px;margin-bottom:14px}.back,.action{border:1px solid #d6b85c66;background:#103b2d;color:var(--gold);border-radius:12px;padding:9px 13px}
+h2{color:var(--gold);margin:5px 0 12px}.search{width:100%;padding:12px;border-radius:12px;border:1px solid #d6b85c66;background:#071f19;color:white;font:inherit;margin:8px 0 14px}
+.item{background:#103b2d;border:1px solid #d6b85c44;border-radius:15px;padding:15px;margin:10px 0;line-height:1.9}
+.item h3{color:var(--gold);margin:0 0 8px;font-size:18px}.arabic{font-size:20px;line-height:2.1}.source{color:#d9c78f;font-size:13px;margin-top:8px}.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.counter{font-size:18px;color:var(--gold)}footer{text-align:center;color:#aabbb0;padding:24px;font-size:12px}
+.notice{border:1px solid #d6b85c55;background:#0b2b21;padding:12px;border-radius:12px;color:#e7ddbd;line-height:1.8}
+@media(min-width:600px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header><div class="logo">حَسَنَة</div><div class="sub">رفيقك للأذكار والأدعية والأحاديث</div></header>
+<main>
+<section id="home">
+<div class="notice">نسخة تجريبية مبدئية. النصوص المعروضة هنا نماذج موثقة، وسيُستكمل المحتوى بعد مراجعة المصادر. لا تُعتبر هذه النسخة مكتبة الـ500 كاملة.</div>
+<div class="grid" style="margin-top:15px">
+<button class="tile" onclick="openSection('morning')"><span>☀️</span>أذكار الصباح</button>
+<button class="tile" onclick="openSection('evening')"><span>🌙</span>أذكار المساء</button>
+<button class="tile" onclick="openSection('prayer')"><span>🕌</span>أذكار الصلاة</button>
+<button class="tile" onclick="openSection('sleep')"><span>🌜</span>أذكار النوم والاستيقاظ</button>
+<button class="tile" onclick="openSection('daily')"><span>📿</span>أذكار اليوم والليلة</button>
+<button class="tile" onclick="openSection('duas')"><span>🤲</span>الأدعية</button>
+<button class="tile" onclick="openSection('hadith')"><span>📚</span>الأحاديث النبوية</button>
+<button class="tile" onclick="openSection('quran')"><span>📖</span>القرآن الكريم</button>
+<button class="tile" onclick="openSection('sources')"><span>🔎</span>المصادر الموثوقة</button>
+<button class="tile" onclick="openSection('tasbeeh')"><span>✨</span>السبحة الإلكترونية</button>
+</div>
+</section>
+<section id="view">
+<div class="top"><button class="back" onclick="goHome()">← الرئيسية</button><h2 id="heading"></h2></div>
+<input id="search" class="search" placeholder="ابحث في هذا القسم..." oninput="renderItems()">
+<div id="items"></div>
+</section>
+</main>
+<footer>حسنة • نسأل الله أن ينفع به</footer>
+<script>
+const data={
+morning:[
+{title:"سيد الاستغفار",text:"اللَّهُمَّ أَنْتَ رَبِّي لا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي، فَاغْفِرْ لِي؛ فَإِنَّهُ لا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.",source:"صحيح البخاري، حديث 6306. يقال صباحًا ومساءً."},
+{title:"رضيت بالله ربًا",text:"رَضِيتُ بِاللَّهِ رَبًّا، وَبِالإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ ﷺ نَبِيًّا.",source:"سنن أبي داود 5072، وجاء في الترمذي 3389."},
+{title:"آية الكرسي",text:"اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ...",source:"سورة البقرة: 255. تُقرأ ضمن أذكار الصباح."}
+],
+evening:[
+{title:"سيد الاستغفار",text:"اللَّهُمَّ أَنْتَ رَبِّي لا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي، فَاغْفِرْ لِي؛ فَإِنَّهُ لا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.",source:"صحيح البخاري، حديث 6306."},
+{title:"أعوذ بكلمات الله التامات",text:"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ.",source:"صحيح مسلم 2708. ورد في أذكار المساء."}
+],
+prayer:[
+{title:"الاستغفار بعد الصلاة",text:"أَسْتَغْفِرُ اللَّهَ (ثلاثًا)، اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالإِكْرَامِ.",source:"صحيح مسلم 591."},
+{title:"التسبيح والتحميد والتكبير",text:"سُبْحَانَ اللَّهِ (33)، وَالْحَمْدُ لِلَّهِ (33)، وَاللَّهُ أَكْبَرُ (33)، ثم تمام المائة: لا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.",source:"صحيح مسلم 597."}
+],
+sleep:[
+{title:"دعاء النوم",text:"بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا.",source:"صحيح البخاري 6324."},
+{title:"دعاء الاستيقاظ",text:"الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ.",source:"صحيح البخاري 6324."}
+],
+daily:[
+{title:"عند دخول الخلاء",text:"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ.",source:"صحيح البخاري 142، وصحيح مسلم 375."},
+{title:"عند الخروج من الخلاء",text:"غُفْرَانَكَ.",source:"سنن أبي داود 30، والترمذي 7."},
+{title:"قبل الطعام",text:"بِسْمِ اللَّهِ.",source:"صحيح البخاري 5376، وصحيح مسلم 2022."}
+],
+duas:[
+{title:"دعاء جامع للخير",text:"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ.",source:"القرآن الكريم، سورة البقرة: 201."},
+{title:"دعاء طلب العلم",text:"رَبِّ زِدْنِي عِلْمًا.",source:"القرآن الكريم، سورة طه: 114."},
+{title:"دعاء المغفرة",text:"رَبَّنَا ظَلَمْنَا أَنْفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ.",source:"القرآن الكريم، سورة الأعراف: 23."},
+{title:"دعاء الثبات",text:"يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ.",source:"جامع الترمذي 2140."}
+],
+hadith:[
+{title:"الأعمال بالنيات",text:"إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى.",source:"صحيح البخاري 1، وصحيح مسلم 1907. حديث صحيح."},
+{title:"الدين النصيحة",text:"الدِّينُ النَّصِيحَةُ.",source:"صحيح مسلم 55. حديث صحيح."},
+{title:"الكلمة الطيبة",text:"الْكَلِمَةُ الطَّيِّبَةُ صَدَقَةٌ.",source:"صحيح البخاري 2989، وصحيح مسلم 1009. حديث صحيح."},
+{title:"لا يؤمن أحدكم",text:"لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لِأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ.",source:"صحيح البخاري 13، وصحيح مسلم 45. حديث صحيح."}
+]
+};
+const titles={morning:"أذكار الصباح",evening:"أذكار المساء",prayer:"أذكار الصلاة",sleep:"أذكار النوم والاستيقاظ",daily:"أذكار اليوم والليلة",duas:"الأدعية",hadith:"الأحاديث النبوية",quran:"القرآن الكريم",sources:"المصادر الموثوقة"};
+let current="";let count=0;
+function openSection(k){current=k;document.getElementById("home").style.display="none";document.getElementById("view").style.display="block";document.getElementById("heading").textContent=k==="tasbeeh"?"السبحة الإلكترونية":titles[k];document.getElementById("search").style.display=k==="tasbeeh"?"none":"block";document.getElementById("items").innerHTML="";if(k==="quran"){document.getElementById("items").innerHTML=`<div class="item"><h3>القرآن الكريم</h3><div>للقراءة والاستماع إلى القرآن الكريم من مصدره، افتح Quran.com.</div><div class="row"><button class="action" onclick="window.open('https://quran.com/','_blank')">فتح القرآن الكريم</button></div><div class="source">هذه النسخة تفتح المصدر الأصلي ولا تخزّن نص المصحف كاملاً داخل التطبيق بعد.</div></div>`}else if(k==="sources"){document.getElementById("items").innerHTML=`<div class="item"><h3>Quran.com</h3><div>مصدر للقرآن الكريم والتلاوات والتفاسير.</div><div class="row"><button class="action" onclick="window.open('https://quran.com/','_blank')">زيارة الموقع</button></div></div><div class="item"><h3>Sunnah.com</h3><div>للبحث في دواوين الحديث والاطلاع على المراجع والتخريج.</div><div class="row"><button class="action" onclick="window.open('https://sunnah.com/','_blank')">زيارة الموقع</button></div></div><div class="notice">سنضيف المحتوى بعد التحقق من دقته وشروط استخدام المصدر.</div>`}else if(k==="tasbeeh"){document.getElementById("items").innerHTML=`<div class="item"><div class="counter">عدد التسبيحات: <b id="count">0</b></div><div class="row"><button class="action" onclick="count++;document.getElementById('count').textContent=count">سبّح</button><button class="action" onclick="count=0;document.getElementById('count').textContent=count">تصفير</button></div></div>`}else renderItems()}
+function renderItems(){if(!current||current==="tasbeeh"||current==="quran"||current==="sources")return;let q=document.getElementById("search").value.trim();let arr=data[current].filter(x=>(x.title+x.text+x.source).includes(q));document.getElementById("items").innerHTML=arr.map(x=>`<article class="item"><h3>${x.title}</h3><div class="arabic">${x.text}</div><div class="source">المصدر: ${x.source}</div></article>`).join("")||'<div class="item">لا توجد نتائج.</div>'}
+function goHome(){document.getElementById("view").style.display="none";document.getElementById("home").style.display="block";current=""}
+if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}
+</script>
+</body></html>
